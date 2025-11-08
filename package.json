@@ -9,18 +9,46 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@tiptap/extension-paragraph": "^3.10.3",
+    "@tiptap/extension-placeholder": "^3.10.3",
+    "@tiptap/extension-text-style": "^3.10.3",
+    "@tiptap/extension-underline": "^3.10.3",
+    "@tiptap/react": "^3.10.3",
+    "@tiptap/starter-kit": "^3.10.3",
+    "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.8.0",
+    "country-state-city": "^3.2.1",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.19",
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^12.23.24",
+    "i18n-iso-countries": "^7.14.0",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.553.0",
+    "mongoose": "^8.19.3",
+    "next": "16.0.1",
+    "next-auth": "^4.24.13",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "react-hot-toast": "^2.6.0",
+    "react-intersection-observer": "^10.0.0",
+    "resend": "^6.4.2",
+    "swr": "^2.3.6",
+    "ua-parser-js": "^2.0.6",
+    "world-countries": "^5.1.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5"
   }
 }
