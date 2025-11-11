@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import RelatedProducts from "@/components/RelatedProducts";
+import RelatedProperties from "@/components/RelatedProperties";
 import Loading from "@/components/Loading";
 import toast from "react-hot-toast";
 import {
@@ -325,7 +325,7 @@ export default function PropertyPage() {
                     key={item._id}
                     className="hover:scale-[1.02] transition-transform duration-200"
                   >
-                    <RelatedProducts product={item} />
+                    <RelatedProperties product={item} />
                   </div>
                 ))}
               </div>

@@ -141,24 +141,12 @@ const ProductCard = ({ product }) => {
       {/* Image */}
       <div className="relative h-28 w-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
         <Image
-          src={product.image[0]}
-          alt={product.name}
+          src={product.image?.[0] || "/placeholder.jpg"} // fallback image
+          alt={product.name || "Product"}
           width={250}
           height={250}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover"
         />
-
-        {/* Favorite */}
-        <button
-          onClick={toggleFavorite}
-          className="absolute top-2 right-2 bg-white/90 dark:bg-gray-700/90 p-1 rounded-full shadow-md hover:scale-110 transition"
-          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-        >
-          <Heart
-            size={14}
-            className={isFavorite ? "text-orange-500 fill-orange-500" : "text-gray-500"}
-          />
-        </button>
       </div>
 
       {/* Details */}

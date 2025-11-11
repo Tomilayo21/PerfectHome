@@ -96,7 +96,7 @@ const Navbar = () => {
             <Link href="/" className="hover:text-orange-500 transition">Home</Link>
             <Link href="/properties" className="hover:text-orange-500 transition">Properties</Link>
             <Link href="/services" className="hover:text-orange-500 transition">Services</Link>
-            <Link href="/projects" className="hover:text-orange-500 transition">Projects</Link>
+            {/* <Link href="/projects" className="hover:text-orange-500 transition">Projects</Link> */}
             <Link href="/about" className="hover:text-orange-500 transition">About Us</Link>
             <Link href="/contact" className="hover:text-orange-500 transition">Contact</Link>
             <Link href="/blog" className="hover:text-orange-500 transition">Blog</Link>
@@ -108,24 +108,18 @@ const Navbar = () => {
 
             {user ? (
               <>
-                {user?.role === "admin" && (
-                  <button
-                    onClick={() => router.push("/admin")}
-                    className="px-3 py-1.5 bg-orange-500 text-white rounded-md text-sm hover:bg-orange-600 transition"
-                  >
-                    Admin
-                  </button>
-                )}
                 <AvatarMenu />
               </>
-            ) : (
-              <button
-                onClick={() => router.push("/signup")}
-                className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              >
-                Admin Sign In
-              </button>
-            )} 
+            ) 
+            // : (
+            //   <button
+            //     onClick={() => router.push("/signup")}
+            //     className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            //   >
+            //     Admin Sign In
+            //   </button>
+            // )
+            : null } 
 
           </div>
 
@@ -172,7 +166,7 @@ const Navbar = () => {
               <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
               <Link href="/properties" onClick={() => setMobileMenuOpen(false)}>Properties</Link>
               <Link href="/services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-              <Link href="/projects" onClick={() => setMobileMenuOpen(false)}>Projects</Link>
+              {/* <Link href="/projects" onClick={() => setMobileMenuOpen(false)}>Projects</Link> */}
               <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
               <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>

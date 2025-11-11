@@ -19,6 +19,10 @@ import TrendingProducts from "@/components/TrendingProducts";
 import Categories from "@/components/Categories";
 import HomePage from "../components/HomePage";
 import PropertySlider from "@/components/PropertySlider";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
+import ContactCTA from "@/components/ContactCTA";
 import PropertyCard from "@/components/PropertyCard";
 import AddProperty from "@/components/AddProperty";
 import AddProductPanel from "@/components/admin/settings/products/AddProductPanel";
@@ -135,11 +139,18 @@ const Home = () => {
   return(
     <>
       <Navbar />
-      <HeaderSlider />
+      {/* <HeaderSlider /> */}
+      <HeroSection />
       <PropertySlider />
+      <AboutSection />
+      <ServicesSection />
+      <ContactCTA />
+      <NewsLetter />
+      <Footer />
       <AddProperty />
       <PropertyListPanel />
-      {/* <HomePage /> */}
+
+      <HomePage />
     </>
   )
 };

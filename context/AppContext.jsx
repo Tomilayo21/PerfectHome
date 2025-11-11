@@ -95,7 +95,7 @@ export const AppContextProvider = ({ children }) => {
   const [themeColor, setThemeColor] = useState("#f97316");
   const [secondaryColor, setSecondaryColor] = useState("#000000");
   const [tertiaryColor, setTertiaryColor] = useState("#ffffff");
-  const [themeMode, setThemeMode] = useState("system");
+  const [themeMode, setThemeMode] = useState("white");
   const [contrastMode, setContrastMode] = useState(false);
   const [layoutStyle, setLayoutStyle] = useState("default");
   const [previewLayoutStyle, setPreviewLayoutStyle] = useState(null);
@@ -268,6 +268,30 @@ export const AppContextProvider = ({ children }) => {
       setLoading(false); // ✅ always end loading
     }
   };
+  useEffect(() => {
+    const fetchAllProperties = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get("/api/property/list");
+        const data = res.data;
+
+        if (Array.isArray(data)) {
+          setProperties(data);
+        } else if (data.success) {
+          setProperties(data.properties || []);
+        } else {
+          toast.error(data.message || "Failed to fetch properties");
+        }
+      } catch (err) {
+        console.error("Error fetching properties:", err);
+        toast.error("Failed to load properties");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllProperties();
+  }, []);
 
 
   const value = {

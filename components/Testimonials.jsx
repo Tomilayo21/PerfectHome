@@ -4,7 +4,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -15,7 +15,9 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 
 export default function TestimonialAdmin() {
-  const { user, isLoaded } = useUser();
+    const { data: session } = useSession();
+    const user = session?.user;
+    const isLoaded = session !== undefined && user;
   const [reviews, setReviews] = useState([]);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);

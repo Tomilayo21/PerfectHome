@@ -147,11 +147,11 @@ export default function Footer() {
           <FooterSection title="Get in Touch">
             <div className="space-y-3 text-sm">
               <p className="flex items-center gap-2">
-                <Phone size={16} className="text-orange-600" />
+                <Phone size={16} className="text-blue-400" />
                 {footerData.footerPhone}
               </p>
               <p className="flex items-center gap-2">
-                <Mail size={16} className="text-orange-600" />
+                <Mail size={16} className="text-blue-400" />
                 {footerData.footerEmail}
               </p>
             </div>

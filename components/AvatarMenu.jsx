@@ -258,31 +258,6 @@ export default function AvatarMenu() {
 
           {/* Actions */}
           <div className="flex flex-col py-2">
-            {mounted && user ? (
-              <>
-                <Link
-                  href="/my-orders"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="gap-3 px-5 py-3 font-thin text-black hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-white"
-                >
-                  My Orders
-                </Link>
-                <Link
-                  href="/favorites"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="gap-3 px-5 py-3 font-thin text-black hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-white"
-                >
-                  Favorites
-                </Link>
-                <Link
-                  href="/cart"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="gap-3 px-5 py-3 font-thin text-black hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-white"
-                >
-                  Cart ({getCartCount()})
-                </Link>
-              </>
-            ) : null }
 
             <button
               onClick={() => {

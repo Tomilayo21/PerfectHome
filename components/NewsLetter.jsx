@@ -50,8 +50,7 @@ const NewsLetter = () => {
   return (
     <div className="flex flex-col items-center mb-12 
       justify-center text-center space-y-4 pt-12 pb-16 
-      bg-gradient-to-b from-gray-50 dark:from-gray-900 
-      to-white dark:to-gray-800 rounded-xl  relative overflow-hidden">
+      relative overflow-hidden">
 
       {/* Decorative Illustration */}
       <img
@@ -61,14 +60,11 @@ const NewsLetter = () => {
       />
 
       {/* Headline */}
-      <h1 className="md:text-4xl text-2xl font-normal text-black dark:text-white z-10 px-4">
-        Subscribe Now & Get Updated
-      </h1>
-
-      {/* Description */}
-      <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 max-w-xl z-10 px-6">
-        Join our newsletter for exclusive discounts, product updates, 
-        and early access to new arrivals — starting with 20% off your first order!
+      <h3 className="text-3xl sm:text-4xl font-bold mb-4">
+          Subscribe to Our Newsletter
+      </h3>
+      <p className="text-gray-600 mb-8 text-lg sm:text-lg">
+        Stay updated with the latest property listings and real estate trends.
       </p>
 
       {/* Subscription Form */}
@@ -105,10 +101,10 @@ const NewsLetter = () => {
           type="submit"
           disabled={loading}
           className="w-full md:w-auto md:px-12 px-8 py-3 
-          md:py-4 bg-orange-600 text-white font-normal 
+          md:py-4 bg-blue-600 text-white font-normal 
           rounded-md md:rounded-r-md md:rounded-l-none 
           transition-all transform hover:scale-105 hover:shadow-lg 
-          hover:shadow-orange-400/50 disabled:opacity-50
+          hover:shadow-blue-400/50 disabled:opacity-50
         "
         >
           {loading ? "Subscribing..." : "Subscribe"}

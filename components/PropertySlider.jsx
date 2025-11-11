@@ -24,8 +24,8 @@ export default function PropertySlider() {
   if (loading) return <p className="text-center mt-10">Loading properties...</p>;
 
   return (
-    <div className="min-h-screen px-6 py-10">
-      <h2 className="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white">
+    <div className="min-h-screen px-6 py-10 dark:bg-black">
+      <h2 className="text-3xl font-semibold text-center mb-8 text-black dark:text-white">
         Featured Properties
       </h2>
 
