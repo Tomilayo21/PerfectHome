@@ -27,10 +27,27 @@ export default function BlogPage() {
     fetchPosts();
   }, []);
 
+
+  useEffect(() => {
+    const navbar = document.getElementById("main-navbar");
+    if (navbar) {
+      const updateHeight = () => {
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty("--navbar-height", height + "px");
+      };
+
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+  }, []);
+  
+
   return (
     <div>
       <Navbar />
-      <div className="px-8 py-16 max-w-7xl mt-16 bg-gray-50 mx-auto">
+      <div className="px-8 py-16 max-w-7xl bg-gray-50 mx-auto pt-[calc(var(--navbar-height)+1rem)]">
         <h1 className="text-3xl md:text-3xl font-bold text-center mb-16 tracking-tight text-gray-900">
           Insights & Market Trends
         </h1>

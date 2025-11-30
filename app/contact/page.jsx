@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { MessageCircle } from "lucide-react";
@@ -43,11 +43,29 @@ const ContactPage = () => {
     }
   };
 
+  useEffect(() => {
+    const navbar = document.getElementById("main-navbar");
+    if (navbar) {
+      const updateHeight = () => {
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty("--navbar-height", height + "px");
+      };
+
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+  }, []);
+
+
   return (
     <>
       <Navbar />
 
-      <div className="flex flex-col mt-16 items-center px-6 md:px-16 lg:px-32 pt-[calc(var(--navbar-height)+1rem)] bg-gray-50 dark:bg-gray-50">
+      <div className="flex flex-col items-center pb-18
+          px-6 md:px-16 lg:px-32 pt-[calc(var(--navbar-height)+1rem)] bg-gray-50 dark:bg-gray-50
+        ">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4 space-x-2">

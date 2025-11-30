@@ -85,6 +85,20 @@ export default function ProductSlider() {
     return () => clearInterval(interval);
   }, [slides, currentSlide]);
 
+  useEffect(() => {
+    const navbar = document.getElementById("main-navbar");
+    if (navbar) {
+      const updateHeight = () => {
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty("--navbar-height", height + "px");
+      };
+
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+  }, []);
 
 
 
@@ -96,7 +110,7 @@ export default function ProductSlider() {
 
 
   return (
-    <div className="relative w-full overflow-hidden mt-16">
+    <div className="relative w-full overflow-hidden pt-[calc(var(--navbar-height)+0.5rem)]">
       <div className="flex transition-transform duration-700 ease-in-out">
         <div key={property.id} className="flex flex-col-reverse md:flex-row items-center justify-between min-w-full py-10 md:py-16 px-6 md:px-20 bg-gray-50 dark:bg-gray-50 gap-10 md:gap-16">
           <div className="flex flex-col md:w-1/2 text-center md:text-left">

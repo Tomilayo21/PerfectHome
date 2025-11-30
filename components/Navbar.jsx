@@ -151,7 +151,14 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(true)}
             className="md:hidden flex items-center justify-center w-9 h-9"
           >
-            <Menu className="text-white" size={28} />
+            <Menu 
+              className={`fixed transition-all duration-300  ${
+                isScrolled
+                  ? "bg-gray-900 text-white"
+                  : "bg-transparent text-black"
+              }`}
+              size={28} 
+            />
           </button>
         </div>
       </nav>
