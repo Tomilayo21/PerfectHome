@@ -155,7 +155,7 @@ export default function AllSectionsPage() {
         >
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="text-center">
             <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-900">
               About Us
             </h1>
@@ -234,7 +234,7 @@ export default function AllSectionsPage() {
               items.map((entry) => (
                 <div
                   key={entry._id}
-                  className="bg-gray-50 dark:bg-gray-50  overflow-hidden transform hover:scale-105 transition-transform duration-300"
+                  className="bg-white dark:bg-white overflow-hidden transform hover:scale-105 transition-transform duration-300"
                 >
                   {/* Image */}
                   <div className="flex justify-center mt-6">
