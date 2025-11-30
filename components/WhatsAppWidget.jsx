@@ -1,47 +1,41 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function WhatsAppWidget() {
+  const containerRef = useRef(null);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Load Elfsight script only once
-    if (!document.querySelector("#elfsight-script")) {
+    // Load Elfsight script once
+    if (!document.getElementById("elfsight-script")) {
       const script = document.createElement("script");
       script.src = "https://static.elfsight.com/platform.js";
       script.defer = true;
       script.id = "elfsight-script";
+      script.onload = () => setScriptLoaded(true);
       document.body.appendChild(script);
-
-      script.onload = () => {
-        if (window.Elfsight) {
-          window.Elfsight.refresh();
-        }
-      };
-    } else if (window.Elfsight) {
-      window.Elfsight.refresh();
+    } else {
+      setScriptLoaded(true);
     }
   }, []);
 
-  return (
-    <div className="fixed bottom-5 right-5 z-[9999] w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
-      <div className="elfsight-app-837a3bbc-d1b9-454f-ae15-61c93db41b36 w-full h-full"></div>
+  useEffect(() => {
+    if (scriptLoaded && window.Elfsight && containerRef.current) {
+      // Refresh the widget so it attaches to the div
+      window.Elfsight.refresh();
+    }
+  }, [scriptLoaded]);
 
-      {/* Hide admin tooltip and reduce hover effects */}
-      <style jsx global>{`
-        .eapps-widget-toolbar-panel-wrapper,
-        .eapps-widget-toolbar-panel-only-you,
-        .eapps-widget-toolbar-panel {
-          display: none !important;
-        }
-        .eapps-widget {
-          pointer-events: auto !important; /* allow normal clicks */
-        }
-        iframe[src*="elfsight"] {
-          pointer-events: auto !important;
-        }
-      `}</style>
+  return (
+    <div
+      ref={containerRef}
+      className="fixed bottom-5 right-5 z-[9999] w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
+    >
+      {/* Elfsight widget container */}
+      <div className="elfsight-app-837a3bbc-d1b9-454f-ae15-61c93db41b36 w-full h-full"></div>
     </div>
   );
 }
