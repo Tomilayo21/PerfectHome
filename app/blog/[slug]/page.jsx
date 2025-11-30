@@ -97,7 +97,7 @@ export default async function SingleBlog({ params }) {
 
 
         {/* CONTENT */}
-        <div className="max-w-3xl mx-auto px-4">
+        <div className="max-w-3xl mx-auto px-8">
           <div
             className="prose prose-lg dark:prose-invert text-justify max-w-none text-black leading-relaxedquill-content text-gray-700 dark:text-gray-700 whitespace-pre-wrap leading-relaxed prose dark:prose-invert max-w-full"
             dangerouslySetInnerHTML={{ __html: post.content }}
