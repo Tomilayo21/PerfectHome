@@ -48,7 +48,7 @@ export default function BlogPage() {
     <div>
       <Navbar />
       <div className="px-8 py-16 max-w-7xl bg-gray-50 mx-auto pt-[calc(var(--navbar-height)+1rem)]">
-        <h1 className="text-3xl md:text-3xl font-bold text-center mb-16 tracking-tight text-gray-900">
+        <h1 className="text-3xl md:text-3xl font-bold text-center mb-8 tracking-tight text-gray-900">
           Insights & Market Trends
         </h1>
 
