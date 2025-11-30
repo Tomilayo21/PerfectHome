@@ -151,12 +151,12 @@ export default function AllSectionsPage() {
       {/* About Us Section */}
 
       <div 
-        className="px-8 bg-gray-50 dark:bg-gray-50 pt-[calc(var(--navbar-height)+1rem)] pb-32"
+        className="px-8 bg-gray-50 dark:bg-gray-50 pt-[calc(var(--navbar-height)+1rem)]"
         >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-semibold text-gray-900 dark:text-gray-900">
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-900">
               About Us
             </h1>
             <p className="mt-2 text-gray-600 dark:text-gray-600">
@@ -177,7 +177,7 @@ export default function AllSectionsPage() {
                   {items.map((entry) => (
                     <div
                       key={entry._id}
-                      className="bg-white dark:bg-white border border-gray-200 dark:border-gray-200 rounded-md shadow-md overflow-hidden transform hover:shadow-lg transition-shadow duration-300"
+                      className="bg-gray-50 dark:bg-gray-50 overflow-hidden transform hover:shadow-lg transition-shadow duration-300"
                     >
                       {/* Text Content */}
                       <div className="px-6 py-6 space-y-4">
@@ -220,7 +220,7 @@ export default function AllSectionsPage() {
         <div className="max-w-6xl mx-auto px-6">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <p className="text-4xl font-semibold text-gray-900 dark:text-gray-900">
+            <p className="text-3xl font-semibold text-gray-900 dark:text-gray-900">
               Our Dedicated Team
             </p>
             <p className="mt-2 text-gray-600 dark:text-gray-600">
@@ -234,7 +234,7 @@ export default function AllSectionsPage() {
               items.map((entry) => (
                 <div
                   key={entry._id}
-                  className="bg-gray-50 dark:bg-gray-50 border border-gray-100 dark:border-gray-100 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+                  className="bg-gray-50 dark:bg-gray-50  overflow-hidden transform hover:scale-105 transition-transform duration-300"
                 >
                   {/* Image */}
                   <div className="flex justify-center mt-6">
@@ -281,7 +281,7 @@ export default function AllSectionsPage() {
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Header */}
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-semibold text-gray-900 dark:text-gray-900">
+            <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-900">
               Trusted Partners
             </h2>
             <p className="mt-3 text-gray-600 dark:text-gray-600 text-lg">
@@ -296,7 +296,7 @@ export default function AllSectionsPage() {
             <div className="absolute right-0 top-0 h-full w-24 bg-gray-50 dark:gray-50 z-10"></div>
 
             {/* Slider Row */}
-            <div className="flex items-center gap-14  animate-slide">
+            <div className="flex items-center gap-14 animate-slide">
               {[...partners, ...partners].map((partner, index) => {
                 const imageUrl = Array.isArray(partner.imageUrl)
                   ? partner.imageUrl[0]
