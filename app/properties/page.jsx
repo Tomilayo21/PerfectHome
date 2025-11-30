@@ -18,6 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
+
 
 const PROPERTIES_PER_PAGE = 25;
 
@@ -190,25 +192,28 @@ const AllProperties = () => {
 
   // === MAIN RENDER ===
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-50">
+    <div>
       <Navbar />
-      <ProductSlider />
 
       <div 
         className="flex flex-col items-start bg-gray-50
-          dark:bg-gray-50 px-6 md:px-16 lg:px-24X pt-[calc(var(--navbar-height)+2rem)]"
+          dark:bg-gray-50 px-6 md:px-16 lg:px-24X pt-[calc(var(--navbar-height)+1rem)]"
         >
         {/* Header */}
-        <div className="w-full flex text-black dark:text-black items-center justify-between border-b pb-6">
+        <div className="w-full flex flex-col items-center border-b pb-6 space-y-4 md:space-y-6">
+          <div className="w-full">
+            <ProductSlider />
+          </div>
+
           <h2
-            className={`font-semibold text-2xl md:text-3xl ${fontSizeClass}`}
-            style={{ color: secondaryColor }}
+            className="font-semibold text-2xl md:text-2xl mt-2 text-center text-black"
           >
             {searchQuery
               ? `Search results for "${searchQuery}"`
               : "All Properties"}
           </h2>
         </div>
+
 
         {/* Filters */}
         {!searchQuery && (
@@ -332,6 +337,7 @@ const AllProperties = () => {
       </div>
 
       <Footer />
+      <WhatsAppWidget />
     </div>
   );
 };

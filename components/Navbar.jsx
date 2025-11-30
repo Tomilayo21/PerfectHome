@@ -93,13 +93,13 @@ const Navbar = () => {
     <>
       <nav
         id="main-navbar"
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300  ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-gray-900 text-white border-b border-blue-900/70 shadow-lg"
             : "bg-transparent text-black"
         }`}
       >
-        <div className="flex items-center justify-between px-4 md:px-16 lg:px-32 py-2 md:py-4 min-h-[60px]">
+        <div className="flex items-center justify-between px-4 sm:px-8 md:px-16 lg:px-32 py-2 sm:py-3 md:py-4 min-h-[60px]">
 
           {/* LOGO */}
           <img
@@ -111,10 +111,10 @@ const Navbar = () => {
             style={{ width: logoWidth, height: logoHeight }}
           />
 
-          {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center gap-8 flex-1 justify-center">
-            <Link href="/" className="hover:text-blue-400 transition">Home</Link>
-            <Link href="/properties" className="hover:text-blue-400 transition">Properties</Link>
+          {/* DESKTOP & TABLET NAV */}
+          <div className="hidden sm:flex md:flex items-center gap-6 sm:gap-8 md:gap-10 flex-1 justify-center">
+            <Link href="/" className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg">Home</Link>
+            <Link href="/properties" className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg">Properties</Link>
 
             <button
               onClick={() => {
@@ -124,23 +124,23 @@ const Navbar = () => {
                   router.push("/#services");
                 }
               }}
-              className="hover:text-blue-400 transition"
+              className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg"
             >
               Services
             </button>
 
-            <Link href="/about" className="hover:text-blue-400 transition">About Us</Link>
-            <Link href="/contact" className="hover:text-blue-400 transition">Contact</Link>
-            <Link href="/blog" className="hover:text-blue-400 transition">Blog</Link>
+            <Link href="/about" className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg">About Us</Link>
+            <Link href="/contact" className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg">Contact</Link>
+            <Link href="/blog" className="hover:text-blue-400 transition text-sm sm:text-base md:text-lg">Blog</Link>
 
             {user && <AvatarMenu />}
           </div>
 
-          {/* DESKTOP CTA */}
-          <div className="hidden md:flex items-center">
+          {/* DESKTOP & TABLET CTA */}
+          <div className="hidden sm:flex md:flex items-center">
             <button
               onClick={() => router.push("/contact")}
-              className="px-5 py-2 rounded-sm bg-blue-600 text-white shadow hover:bg-blue-800 transition-all text-sm"
+              className="px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-sm bg-blue-600 text-white shadow hover:bg-blue-800 transition-all text-xs sm:text-sm md:text-sm"
             >
               Schedule a Tour
             </button>
@@ -149,19 +149,19 @@ const Navbar = () => {
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden flex items-center justify-center w-9 h-9"
+            className="sm:hidden flex items-center justify-center w-9 h-9"
           >
-            <Menu 
-              className={`fixed transition-all duration-300  ${
-                isScrolled
-                  ? "bg-gray-900 text-white"
-                  : "bg-transparent text-black"
+            <Menu
+              className={`transition-all duration-300 ${
+                isScrolled ? "bg-gray-900 text-white" : "bg-transparent text-black"
               }`}
-              size={28} 
+              size={28}
             />
           </button>
+
         </div>
       </nav>
+
 
       {/* ⭐ SEPARATE DRAWER COMPONENT ⭐ */}
       <MobileMenuDrawer

@@ -13,6 +13,8 @@ import ServicesSection from "@/components/ServicesSection";
 import ContactCTA from "@/components/ContactCTA";
 import NewsLetter from "@/components/NewsLetter";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
+
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -91,29 +93,7 @@ const Home = () => {
       <BlogSection />
       <Footer />
 
-      {/* WhatsApp Widget Script ONLY */}
-      <Script
-        src="https://elfsightcdn.com/platform.js"
-        strategy="afterInteractive"
-        onLoad={() => {
-          console.log("WhatsApp widget loaded");
-          setTimeout(() => {
-            if (window.Elfsight) window.Elfsight.refresh();
-          }, 300);
-        }}
-      />
-
-      {/* WhatsApp Widget Container ONLY */}
-      <div
-        className="elfsight-app-7de49692-9a02-4c41-aca9-3305a83ef783"
-        data-elfsight-app-lazy
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          zIndex: 99999,
-        }}
-      ></div>
+      <WhatsAppWidget />
     </>
   );
 };
