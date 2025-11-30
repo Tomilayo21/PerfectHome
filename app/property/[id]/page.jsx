@@ -314,14 +314,6 @@ export default function PropertyPage() {
               {liked ? "Saved" : "Save Property"}
             </button> */}
 
-            <button
-              onClick={() =>
-                router.push(`/contact-agent?propertyId=${property._id}`)
-              }
-              className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-md shadow-md hover:bg-blue-700 transition"
-            >
-              Contact Agent <ArrowRight size={18} />
-            </button>
             <ContactAgentButton 
               property={property} 
               agentNumber={property.agentPhone} 
