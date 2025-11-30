@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RelatedProperties from "@/components/RelatedProperties";
 import Loading from "@/components/Loading";
+import ContactAgentButton from "@/components/ContactAgentButton";
+ 
 import toast from "react-hot-toast";
 import {
   Bed,
@@ -320,6 +322,11 @@ export default function PropertyPage() {
             >
               Contact Agent <ArrowRight size={18} />
             </button>
+            <ContactAgentButton 
+              property={property} 
+              agentNumber={property.agentPhone} 
+            />
+
           </div>
 
           {/* --- Related --- */}
