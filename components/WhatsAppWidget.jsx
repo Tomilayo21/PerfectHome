@@ -86,13 +86,15 @@ export default function WhatsAppButton() {
   return (
     <div className="fixed bottom-5 right-5 z-[9999]">
       <a
-        href="https://wa.me/08100515622"
+        href="https://wa.me/2348100515622?text=Hello%2C%20I%27m%20interested%20in%20learning%20more%20about%20properties%20listed%20on%20your%20website.%20Could%20you%20please%20assist%20me%3F"
         target="_blank"
         rel="noopener noreferrer"
         className="bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg transition-all"
-      >
-        <FaWhatsapp className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
-      </a>
+        >
+            <FaWhatsapp className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+    </a>
+
+
     </div>
   );
 }
