@@ -69,6 +69,21 @@ export default function PropertyPage() {
     loadProperty();
   }, [id, properties, favorites]);
 
+  useEffect(() => {
+    const navbar = document.getElementById("main-navbar");
+    if (navbar) {
+      const updateHeight = () => {
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty("--navbar-height", height + "px");
+      };
+
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+  }, []);
+
   const handleLike = () => {
     if (!property) return;
     setLiked((prev) => !prev);
@@ -90,7 +105,7 @@ export default function PropertyPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-50 dark:bg-gray-50 text-gray-900 dark:text-gray-100 pt-8 mt-16 pb-20">
+      <main className="min-h-screen bg-gray-50 dark:bg-gray-50 text-gray-900 dark:text-gray-100 pt-[calc(var(--navbar-height)+2rem)] pb-20">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           {/* --- Image Gallery --- */}
             <div className="grid md:grid-cols-[1.7fr_0.5fr] gap-4 rounded-md overflow-hidden">
