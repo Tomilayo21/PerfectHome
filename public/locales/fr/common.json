@@ -1,0 +1,10 @@
+{
+  "welcome": "Bienvenue dans notre application !",
+  "loadingMessage": "Chargement...",
+  "preferredLanguage": "Langue préférée",
+  "home": "Accueil",
+  "about": "À propos de nous",
+  "contact": "Contact",
+  "submit": "Soumettre",
+  "cancel": "Annuler"
+}
