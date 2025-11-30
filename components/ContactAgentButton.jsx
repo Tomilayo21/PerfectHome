@@ -1,42 +1,41 @@
 "use client";
 
-import { useState } from "react";
 import { ArrowRight, Phone, MessageSquare } from "lucide-react";
 
-export default function ContactAgentButton({ property, agentNumber }) {
-  const [open, setOpen] = useState(false);
-
+export default function ContactAgentButton({ property }) {
   // Fallbacks if property info is missing
   const propertyTitle = property?.title || "the property";
   const propertyAddress = property?.address
     ? `${property.address}, ${property.city}, ${property.state}, ${property.country}`
     : "the listed address";
 
-  // Function to convert local Nigerian numbers to international format
-  const formatNumberForWhatsApp = (number) => {
-    if (!number) return "";
-    let num = number.trim();
-    if (num.startsWith("0")) {
-      num = "234" + num.slice(1); // Replace leading 0 with country code
-    } else if (num.startsWith("+")) {
-      num = num.slice(1); // Remove any + if accidentally included
-    }
-    return num;
-  };
+  // Agent's fixed number
+  const agentNumber = "08100515622";
 
-  const formattedNumber = formatNumberForWhatsApp(agentNumber);
+  // Convert to international format for WhatsApp & tel
+  const formattedNumber = agentNumber.startsWith("0")
+    ? "234" + agentNumber.slice(1)
+    : agentNumber.startsWith("+")
+    ? agentNumber.slice(1)
+    : agentNumber;
 
-  // Professional preloaded message
-  const message = encodeURIComponent(
-    `Hello, I'm reaching out regarding your listed property *${propertyTitle}* located at ${propertyAddress}. Is it still available? I would love to get more details and possibly schedule an inspection. Thank you!`
-  );
+  // Preloaded professional message
+  const messageText = `Hello, I'm reaching out regarding your listed property *${propertyTitle}* located at ${propertyAddress}. Is it still available? I would love to get more details and possibly schedule a viewing. Thank you!`;
 
-  const whatsappLink = `https://wa.me/${formattedNumber}?text=${message}`;
+  const encodedMessage = encodeURIComponent(messageText);
+
+  // WhatsApp: mobile vs desktop
+  const isMobile = typeof navigator !== "undefined" && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const whatsappLink = isMobile
+    ? `https://wa.me/${formattedNumber}?text=${encodedMessage}`
+    : `https://web.whatsapp.com/send?phone=${formattedNumber}&text=${encodedMessage}`;
+
   const callLink = `tel:${formattedNumber}`;
-  const smsLink = `sms:${formattedNumber}?body=${message}`;
+  const smsLink = `sms:${formattedNumber}?body=${encodedMessage}`;
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-wrap">
       {/* WhatsApp */}
       <a
         href={whatsappLink}
