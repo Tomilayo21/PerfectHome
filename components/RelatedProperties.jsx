@@ -1,120 +1,3 @@
-// "use client";
-
-// import React, { useEffect, useState } from "react";
-// import Image from "next/image";
-// import { useAppContext } from "@/context/AppContext";
-// import { Heart, Star, MapPin } from "lucide-react";
-// import toast from "react-hot-toast";
-
-// const RelatedPropertyCard = ({ property }) => {
-//   const { router, currency } = useAppContext();
-//   if (!property || property.visible === false) return null;
-
-//   const handleCardClick = () => {
-//     router.push(`/property/${property._id}`);
-//     scrollTo(0, 0);
-//   };
-
-//   return (
-//     <div
-//       onClick={handleCardClick}
-//       className="group cursor-pointer rounded-sm border border-gray-200 dark:border-gray-800 bg-white dark:bg-white shadow-sm hover:shadow-md transform transition-all duration-300 overflow-hidden w-full sm:w-[180px] md:w-[220px]"
-//     >
-//       {/* Image */}
-//       <div className="relative h-40 w-full overflow-hidden">
-//         <Image
-//           src={property.images?.[0] || "/placeholder.jpg"}
-//           alt={property.title || "Property"}
-//           fill
-//           className="object-cover group-hover:scale-105 transition-transform duration-300"
-//         />
-//         {/* Price Tag Overlay */}
-//         {property.price && (
-//           <div className="absolute top-2 right-2 bg-blue-600/80 text-white text-xs font-medium px-3 py-1 rounded-md shadow">
-//             {currency} {Number(property.price).toLocaleString()}
-//           </div>
-//         )}
-//       </div>
-
-//       {/* Property Info */}
-//       <div className="p-4 flex flex-col gap-1">
-//         {/* Name */}
-//         <h3 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white truncate">
-//           {property.title}
-//         </h3>
-
-//         {/* Location */}
-//         {property.address && (
-//           <p className="flex items-center gap-1 text-gray-500 text-xs md:text-sm">
-//             <MapPin size={12} className="text-blue-500" /> {property.address}, {property.city}
-//           </p>
-//         )}
-
-//         {/* Type / Category Badge */}
-//         <div className="flex flex-wrap gap-2 mt-1">
-//           {property.type && (
-//             <span className="text-xs md:text-sm bg-blue-50 text-blue-600 dark:bg-blue-900 dark:text-blue-300 px-2 py-0.5 rounded-full">
-//               {property.type}
-//             </span>
-//           )}
-//           {property.category && (
-//             <span className="text-xs md:text-sm bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 px-2 py-0.5 rounded-full">
-//               {property.category}
-//             </span>
-//           )}
-//         </div>
-
-//         {/* Bedrooms / Bathrooms */}
-//         <p className="text-gray-500 text-xs md:text-sm mt-1">
-//           {property.bedrooms} Bed • {property.bathrooms} Bath • {property.toilets} Toilet
-//         </p>
-
-//         {/* Optional Action / CTA */}
-//         <button className="mt-2 w-full text-center bg-blue-600 text-white text-xs md:text-sm font-medium rounded-md py-1.5 hover:bg-blue-700 transition">
-//           View Details
-//         </button>
-//       </div>
-//     </div>
-
-//   );
-// };
-
-// export default RelatedPropertyCard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -167,7 +50,7 @@ const RelatedPropertyCard = ({ property }) => {
 
   return (
     <div
-      className="group relative w-full sm:w-[180px] md:w-[220px] cursor-pointer rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+      className="group relative w-full sm:w-[180px] md:w-[220px] cursor-pointer rounded-sm border border-gray-100 dark:border-gray-100 bg-white dark:bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -217,7 +100,7 @@ const RelatedPropertyCard = ({ property }) => {
 
         {/* Price Tag */}
         {property.price && (
-          <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-md shadow z-10">
+          <div className="absolute top-2 right-2 bg-blue-600/80 text-white text-xs font-medium px-3 py-1 rounded-md shadow z-10">
             {currency} {Number(property.price).toLocaleString()}
           </div>
         )}
@@ -247,7 +130,7 @@ const RelatedPropertyCard = ({ property }) => {
 
       {/* Property Info */}
       <div className="p-3 flex flex-col gap-1">
-        <h3 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white truncate">
+        <h3 className="text-sm md:text-base font-semibold text-gray-900 dark:text-gray-900 truncate">
           {property.title}
         </h3>
 
@@ -263,7 +146,7 @@ const RelatedPropertyCard = ({ property }) => {
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-xs md:text-sm bg-blue-50 text-blue-600 dark:bg-blue-900 dark:text-blue-300 px-2 py-0.5 rounded-full"
+              className="text-xs md:text-sm bg-blue-50 text-blue-600 dark:bg-blue-50 dark:text-blue-600 px-2 py-0.5 rounded-md"
             >
               {property.type}
             </motion.span>
@@ -273,7 +156,7 @@ const RelatedPropertyCard = ({ property }) => {
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xs md:text-sm bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 px-2 py-0.5 rounded-full"
+              className="text-xs md:text-sm bg-gray-100 text-gray-700 dark:bg-gray-100 dark:text-gray-700 px-2 py-0.5 rounded-md"
             >
               {property.category}
             </motion.span>
