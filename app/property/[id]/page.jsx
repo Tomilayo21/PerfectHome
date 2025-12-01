@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import RelatedProperties from "@/components/RelatedProperties";
+import RelatedPropertyCard from "@/components/RelatedProperties";
 import Loading from "@/components/Loading";
 import ContactAgentButton from "@/components/ContactAgentButton";
  
@@ -318,21 +318,32 @@ export default function PropertyPage() {
           {/* --- Related --- */}
           {related?.length > 0 && (
             <section className="mt-16">
-              <h2 className="text-2xl font-semibold mb-6">
+              <h2 className="text-2xl text-black font-semibold mb-6">
                 Related Properties
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+
+              <div className="
+                grid 
+                grid-cols-1
+                sm:grid-cols-1
+                md:grid-cols-3
+                lg:grid-cols-4
+                xl:grid-cols-5
+                2xl:grid-cols-6
+                gap-2 px-3
+              ">
                 {related.map((item) => (
                   <div
                     key={item._id}
                     className="hover:scale-[1.02] transition-transform duration-200"
                   >
-                    <RelatedProperties product={item} />
+                    <RelatedPropertyCard property={item} />
                   </div>
                 ))}
               </div>
             </section>
           )}
+
         </div>
       </main>
       <Footer />
