@@ -112,26 +112,20 @@ const RelatedPropertyCard = ({ property }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center gap-1 p-1 pointer-events-none"
+              className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center gap-1 p-1 pointer-events-none"
             >
-              <div className="flex flex-col gap-1 pointer-events-auto w-full max-w-[120px] items-center">
+              <div className="flex flex-col gap-2 pointer-events-auto w-full px-6 items-center">
                 <button
                   onClick={(e) => { e.stopPropagation(); handleCardClick(); }}
-                  className="bg-white text-black text-xs px-3 py-0.5 rounded font-medium hover:bg-gray-200 transition"
+                  className="bg-white text-black px-4 py-1 rounded-md font-medium hover:bg-gray-200 transition"
                 >
                   View Details
                 </button>
-                <div className="w-full">
-                  <ContactAgentButton
-                    property={property}
-                    className="w-full text-xs px-3 py-0.5" // pass smaller size styles
-                  />
-                </div>
+                <ContactAgentButton property={property} />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
 
       {/* Property Info */}
