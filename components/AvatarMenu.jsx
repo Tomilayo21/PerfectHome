@@ -292,27 +292,28 @@ export default function AvatarMenu() {
   useEffect(() => {
     const parser = new UAParser();
     const result = parser.getResult();
-    setDeviceInfo({
-      os: result.os.name || "Unknown OS",
-      browser: result.browser.name || "Unknown Browser",
-    });
+    const os = result.os.name || "Unknown OS";
+    const browser = result.browser.name || "Unknown Browser";
 
+    setDeviceInfo({ os, browser });
 
-    const now = new Date();
-    setTime(
-      now.toLocaleString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      })
-    );
-
-    // Get location (city, country) using a free IP-based service
     fetch("https://ipapi.co/json/")
-      .then((res) => res.json())
-      .then((data) => setLocation(`${data.city}, ${data.country_name}`))
+      .then(res => res.json())
+      .then(data => {
+        const city = data.city || "Unknown City";
+        const country = data.country_name || "Unknown Country";
+        setLocation(`${city}, ${country}`);
+
+        // Save device info to backend
+        fetch("/api/user/track-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ os, browser, city, country }),
+        });
+      })
       .catch(() => setLocation("Unknown Location"));
   }, []);
+
 
 
   return (
@@ -632,13 +633,21 @@ export default function AvatarMenu() {
               {/* Security */}
               {!isLoading && tab === "security" && (
                 <div className="space-y-5">
+
+                  {/* Password Section */}
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                     <p className="font-normal text-black dark:text-gray-200">Password</p>
-                    <button className="text-sm text-blue-600 hover:underline">Update password</button>
+                    <button
+                      className="text-sm text-blue-600 hover:underline"
+                      onClick={() => setTab("password")}
+                    >
+                      Update password
+                    </button>
                   </div>
 
+                  {/* Password Change Form */}
                   <form onSubmit={handleChangePassword} className="space-y-3">
-                    {/* Current password */}
+                    {/* Current Password */}
                     <div className="relative w-full sm:w-2/3 md:w-1/2">
                       <input
                         disabled={isGoogleUser}
@@ -647,14 +656,10 @@ export default function AvatarMenu() {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         className={`w-full px-3 py-2 font-normal rounded border 
-                          ${isGoogleUser ? "bg-gray-200 dark:bg-neutral-800 opacity-60 cursor-not-allowed" 
-                                        : "bg-white dark:bg-neutral-900"}
+                          ${isGoogleUser ? "bg-gray-200 dark:bg-neutral-800 opacity-60 cursor-not-allowed" : "bg-white dark:bg-neutral-900"}
                           border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100
-                          placeholder-gray-400 dark:placeholder-gray-500 pr-10 
-                          focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-300`}
+                          placeholder-gray-400 dark:placeholder-gray-500 pr-10 focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-300`}
                       />
-
-                      {/* Disable eye button too */}
                       <button
                         type="button"
                         disabled={isGoogleUser}
@@ -664,10 +669,9 @@ export default function AvatarMenu() {
                       >
                         {showCurrent ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
-
                     </div>
 
-                    {/* New password */}
+                    {/* New Password */}
                     <div className="relative w-full sm:w-2/3 md:w-1/2">
                       <input
                         disabled={isGoogleUser}
@@ -681,13 +685,10 @@ export default function AvatarMenu() {
                           setPasswordErrors(checkPasswordRules(val));
                         }}
                         className={`w-full px-3 py-2 font-normal rounded border 
-                          ${isGoogleUser ? "bg-gray-200 dark:bg-neutral-800 opacity-60 cursor-not-allowed" 
-                                        : "bg-white dark:bg-neutral-900"}
+                          ${isGoogleUser ? "bg-gray-200 dark:bg-neutral-800 opacity-60 cursor-not-allowed" : "bg-white dark:bg-neutral-900"}
                           border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 
-                          placeholder-gray-400 dark:placeholder-gray-500 pr-10 
-                          focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-300`}
+                          placeholder-gray-400 dark:placeholder-gray-500 pr-10 focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-300`}
                       />
-
                       <button
                         type="button"
                         disabled={isGoogleUser}
@@ -697,7 +698,6 @@ export default function AvatarMenu() {
                       >
                         {showNew ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
-
                     </div>
 
                     {passwordErrors.length > 0 && (
@@ -708,41 +708,68 @@ export default function AvatarMenu() {
                       </ul>
                     )}
 
-
                     <button
                       type="submit"
                       disabled={isGoogleUser || changingPass}
                       className={`text-sm px-5 py-2 rounded-full transition 
-                        ${isGoogleUser
-                          ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                          : "bg-blue-600 text-white hover:bg-blue-700"
-                        }`}
+                        ${isGoogleUser ? "bg-gray-300 text-gray-600 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
                     >
                       {isGoogleUser ? "Google Account — Password Locked" 
                                     : changingPass ? "Updating..." 
                                     : "Update password"}
                     </button>
-
                   </form>
 
-                  <div className="bg-gray-50 dark:bg-black border dark:border-white p-3 rounded-lg text-xs">
-                    <p className="text-gray-700 dark:text-gray-300 font-medium mb-1">
-                      Active Device
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      {deviceInfo.os} • {deviceInfo.browser} • {location || "Loading..."}
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Today at {time || "Loading..."}
-                    </p>
+                  {/* Active Sessions / Devices */}
+                  <div className="bg-gray-50 dark:bg-black border dark:border-white p-3 rounded-lg text-xs space-y-3">
+                    <p className="text-gray-700 dark:text-gray-300 font-medium mb-1">Active Devices</p>
+
+                    {session.user.sessions?.length > 0 ? (
+                      // Remove duplicates and sort by lastActive descending
+                      [...new Map(
+                        session.user.sessions.map(s => [`${s.os}-${s.browser}-${s.ip}`, s])
+                      ).values()]
+                        .sort((a, b) => new Date(b.lastActive) - new Date(a.lastActive))
+                        .map((s, idx) => (
+                          <div
+                            key={idx}
+                            className="flex justify-between items-start border-b dark:border-gray-700 pb-2 last:border-b-0"
+                          >
+                            <div className="space-y-1">
+                              <p className="text-gray-500 dark:text-gray-400">{s.os} • {s.browser}</p>
+                              <p className="text-gray-500 dark:text-gray-400">{s.city}, {s.country}</p>
+                              <p className="text-gray-500 dark:text-gray-400">
+                                Last Active: {new Date(s.lastActive).toLocaleString()}
+                              </p>
+                            </div>
+                            <button
+                              className="text-red-500 text-xs hover:underline mt-1"
+                              onClick={async () => {
+                                const res = await fetch("/api/user/logout-session", {
+                                  method: "POST",
+                                  body: JSON.stringify({ token: s.token }),
+                                  headers: { "Content-Type": "application/json" },
+                                });
+                                if (res.ok) router.refresh();
+                              }}
+                            >
+                              Log out
+                            </button>
+                          </div>
+                        ))
+                    ) : (
+                      <p className="text-gray-500 dark:text-gray-400">No active devices found.</p>
+                    )}
                   </div>
 
 
-                 <div className="mt-2 flex flex-col gap-1">
+                  {/* Delete Account */}
+                  <div className="mt-2 flex flex-col gap-1">
                     <DeleteAccountModal />
                   </div>
                 </div>
               )}
+
             </div>
             </Dialog.Panel>
           </div>

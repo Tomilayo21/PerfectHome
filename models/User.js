@@ -1,4 +1,3 @@
-// models/User.js
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -17,6 +16,18 @@ const userSchema = new mongoose.Schema(
     resetToken: { type: String },
     resetTokenExpiry: { type: Date },
     authProvider: { type: String, enum: ["credentials", "google"], default: "credentials" },
+    sessions: [
+      {
+        _id: false,
+        token: { type: String },    
+        os: { type: String },
+        browser: { type: String },
+        ip: { type: String },
+        city: { type: String },
+        country: { type: String },
+        lastActive: { type: Date, default: Date.now },
+      }
+    ],
   },
   {
     timestamps: true,
