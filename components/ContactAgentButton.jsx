@@ -31,8 +31,9 @@ export default function ContactAgentButton({ property }) {
     ? `https://wa.me/${formattedNumber}?text=${encodedMessage}`
     : `https://web.whatsapp.com/send?phone=${formattedNumber}&text=${encodedMessage}`;
 
-  const callLink = `tel:${formattedNumber}`;
-  const smsLink = `sms:${formattedNumber}?body=${encodedMessage}`;
+  const callLink = `tel:+${formattedNumber}`;
+  const smsLink = `sms:+${formattedNumber}?body=${encodedMessage}`;
+
 
   return (
     <div className="flex gap-2 flex-wrap">
