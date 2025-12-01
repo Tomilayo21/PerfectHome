@@ -93,6 +93,7 @@
 
 import React from "react";
 import { ArrowRight, Phone, MessageSquare } from "lucide-react";
+import SmartCallButton from "./SmartCallButton";
 
 export default function ContactAgentButton({ property }) {
   const propertyTitle = property?.title || "the property";
@@ -185,6 +186,7 @@ export default function ContactAgentButton({ property }) {
       >
         Message <MessageSquare size={16} />
       </a>
+      <SmartCallButton />
     </div>
   );
 }
