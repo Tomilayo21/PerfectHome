@@ -583,7 +583,6 @@ export default function AvatarMenu() {
                       Username
                     </p>
                     <input
-                      disabled={isGoogleUser}
                       value={localUsername}
                       onChange={(e) => setLocalUsername(e.target.value)}
                       className="w-full sm:w-2/3 px-2 py-1 rounded border border-gray-300 dark:border-gray-700
