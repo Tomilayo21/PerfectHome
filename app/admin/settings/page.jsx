@@ -284,7 +284,7 @@ export default function AdminSettings() {
                       onClick={() => setSettingsPanel('site')}
                       className="
                         flex flex-col items-start
-                        bg-orange-100 hover:bg-orange-200 text-orange-800
+                        bg-blue-100 hover:bg-blue-200 text-blue-800
                         dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 
                         dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg
                         p-4 rounded-xl shadow-sm
@@ -431,7 +431,7 @@ export default function AdminSettings() {
 
                       <button
                         type="submit"
-                        className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? "Saving..." : "Save Changes"}
@@ -613,7 +613,7 @@ export default function AdminSettings() {
 
                       <button
                         type="submit"
-                        className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? "Saving..." : "Save Changes"}

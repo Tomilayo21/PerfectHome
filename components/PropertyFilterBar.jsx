@@ -179,7 +179,7 @@ export default function PropertyFilterBar() {
           <button className="flex items-center justify-between w-full md:hidden bg-white border border-gray-200 shadow-sm rounded-2xl px-4 py-3"
             onClick={() => setShowFilters(!showFilters)}>
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-orange-600" />
+              <SlidersHorizontal className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-normal text-black">Filters</span>
             </div>
             <span className="text-xs text-gray-500">{showFilters ? "Hide" : "Show"}</span>

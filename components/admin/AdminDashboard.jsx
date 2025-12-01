@@ -127,7 +127,7 @@ export default function AdminDashboard() {
               <span className="text-sm text-gray-900 dark:text-white truncate">
                 {locationName}
               </span>
-              <span className="text-sm font-medium text-orange-600">{count}</span>
+              <span className="text-sm font-medium text-blue-600">{count}</span>
             </li>
           );
         })}
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="text-xs text-gray-500 truncate">{location}</div>
               </div>
-              <div className="flex-shrink-0 text-sm font-semibold text-orange-600">
+              <div className="flex-shrink-0 text-sm font-semibold text-blue-600">
                 {views}
               </div>
             </li>
@@ -208,7 +208,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="text-xs text-gray-500 truncate">{location}</div>
               </div>
-              <div className="flex-shrink-0 text-sm font-semibold text-orange-600">
+              <div className="flex-shrink-0 text-sm font-semibold text-blue-600">
                 {clicks}
               </div>
             </li>
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {stats.map((item, idx) => (
             <div key={idx} className="group relative bg-white dark:bg-black p-4 sm:p-6 rounded-md shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all duration-300">
-              {showIcons && <div className="flex items-center justify-center w-10 h-10 mb-2 sm:mb-4 rounded-md bg-orange-50 text-orange-600">{item.icon}</div>}
+              {showIcons && <div className="flex items-center justify-center w-10 h-10 mb-2 sm:mb-4 rounded-md bg-blue-50 text-blue-600">{item.icon}</div>}
               <h3 className="text-xs sm:text-sm font-normal text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">{item.title}</h3>
               <p className="text-lg sm:text-xl font-normal text-gray-900 dark:text-white">{loading ? "—" : item.value}</p>
             </div>

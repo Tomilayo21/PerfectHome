@@ -270,7 +270,7 @@ const AllProperties = () => {
                 className={`flex items-center gap-1 px-3 py-1 rounded border text-sm font-medium transition ${
                   currentPage === 1
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-gray-700 hover:bg-orange-100"
+                    : "bg-white text-gray-700 hover:bg-blue-100"
                 }`}
               >
                 <ChevronLeft className="w-4 h-4" /> Prev
@@ -310,8 +310,8 @@ const AllProperties = () => {
                     onClick={() => changePage(pageNum)}
                     className={`px-3 py-1 rounded border text-sm font-medium transition ${
                       pageNum === currentPage
-                        ? "bg-orange-600 text-white"
-                        : "bg-white text-gray-800 hover:bg-orange-100"
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-800 hover:bg-blue-100"
                     }`}
                   >
                     {pageNum}
@@ -326,7 +326,7 @@ const AllProperties = () => {
                 className={`flex items-center gap-1 px-3 py-1 rounded border text-sm font-medium transition ${
                   currentPage === totalPages
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-gray-700 hover:bg-orange-100"
+                    : "bg-white text-gray-700 hover:bg-blue-100"
                 }`}
               >
                 Next <ChevronRight className="w-4 h-4" />

@@ -110,7 +110,7 @@ export default function TermsEditor() {
         ) : (
           <button
             onClick={handleAdd}
-            className="px-4 py-2 bg-orange-600 text-white rounded dark:bg-black dark:border dark:hover:bg-gray-800"
+            className="px-4 py-2 bg-blue-600 text-white rounded dark:bg-black dark:border dark:hover:bg-gray-800"
           >
             Add Term
           </button>

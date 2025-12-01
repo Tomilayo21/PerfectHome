@@ -93,7 +93,7 @@ export default function FAQEditor() {
         ) : (
           <button
             onClick={handleAdd}
-            className="px-4 py-2 bg-orange-600 text-white rounded dark:bg-black dark:border dark:hover:bg-gray-800"
+            className="px-4 py-2 bg-blue-600 text-white rounded dark:bg-black dark:border dark:hover:bg-gray-800"
           >
             Add FAQ
           </button>
@@ -108,7 +108,7 @@ export default function FAQEditor() {
               <p className="text-sm font-light text-gray-700">{faq.answer}</p>
             </div>
             <div className="space-x-2">
-              <button onClick={() => startEdit(faq)} className="text-orange-600 text-sm dark:text-orange-400 dark:hover:text-orange-300">
+              <button onClick={() => startEdit(faq)} className="text-blue-600 text-sm dark:text-blue-400 dark:hover:text-blue-300">
                 Edit
               </button>
               <button onClick={() => handleDelete(faq._id)} className="text-red-600 text-sm dark:text-red-400 dark:hover:text-red-300">

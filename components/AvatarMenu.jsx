@@ -508,7 +508,7 @@ export default function AvatarMenu() {
                   onClick={() => setTab(t)}
                   className={`flex-1 md:flex-none text-center md:text-left px-3 py-2 font-medium border-b md:border-b-0 md:border-l md:first:border-l-0
                     ${tab === t
-                      ? "bg-orange-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
+                      ? "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                       : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800"
                     }`}
                 >

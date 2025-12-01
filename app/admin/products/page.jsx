@@ -47,7 +47,7 @@ export default function AdminSettings() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                       <button
                         onClick={() => setPropertyPanel('add')}
-                        className="flex flex-col items-start bg-orange-100 hover:bg-orange-200 text-orange-800 p-4 rounded-xl shadow 
+                        className="flex flex-col items-start bg-blue-100 hover:bg-blue-200 text-blue-800 p-4 rounded-xl shadow 
                         dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 
                         dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg"
                       >

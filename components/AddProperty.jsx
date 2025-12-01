@@ -202,7 +202,7 @@ const AddProperty = () => {
               t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
             } max-w-md w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg pointer-events-auto flex items-center gap-3 p-4 transition-all`}
           >
-            <CheckCircle className="text-orange-500" size={22} />
+            <CheckCircle className="text-blue-500" size={22} />
             <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
               Property added successfully!
             </p>
@@ -326,7 +326,7 @@ const AddProperty = () => {
                 ))}
 
                 {files.length < 10 && (
-                    <label className="w-28 h-28 sm:w-32 sm:h-32 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-orange-500 hover:border-orange-500 cursor-pointer transition">
+                    <label className="w-28 h-28 sm:w-32 sm:h-32 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-blue-500 hover:border-blue-500 cursor-pointer transition">
                     <input
                         type="file"
                         hidden
@@ -381,7 +381,7 @@ const AddProperty = () => {
                 ))}
 
                 {videoFiles.length < 3 && (
-                    <label className="w-40 h-28 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-orange-500 hover:border-orange-500 cursor-pointer transition">
+                    <label className="w-40 h-28 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-blue-500 hover:border-blue-500 cursor-pointer transition">
                     <input
                         type="file"
                         hidden
@@ -473,7 +473,7 @@ const AddProperty = () => {
                         <input
                             type="text"
                             placeholder="Add a feature (e.g. Swimming Pool, Smart Lighting)"
-                            className="w-full py-3 px-4 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition placeholder:text-gray-400 text-sm"
+                            className="w-full py-3 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition placeholder:text-gray-400 text-sm"
                             value={featureInput}
                             onChange={(e) => setFeatureInput(e.target.value)}
                             onKeyDown={(e) => {
@@ -518,13 +518,13 @@ const AddProperty = () => {
                     {features.map((feature, idx) => (
                         <span
                         key={idx}
-                        className="group flex items-center gap-2 px-3 py-1.5 bg-orange-50 text-orange-700 border border-orange-200 rounded-full text-sm font-medium hover:bg-orange-100 transition"
+                        className="group flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-sm font-medium hover:bg-blue-100 transition"
                         >
                         <span>{feature}</span>
                         <button
                             type="button"
                             onClick={() => setFeatures(features.filter((_, i) => i !== idx))}
-                            className="text-orange-400 hover:text-orange-700 transition"
+                            className="text-blue-400 hover:text-blue-700 transition"
                         >
                             <svg
                             xmlns="http://www.w3.org/2000/svg"

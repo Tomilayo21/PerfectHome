@@ -48,10 +48,7 @@ const NewsLetter = () => {
 
 
   return (
-    <div className="flex flex-col items-center  bg-gray-50
-      justify-center text-center space-y-4 pt-12 pb-16 
-      relative overflow-hidden">
-
+    <div className="flex flex-col items-center bg-gray-50 justify-center text-center space-y-4 pt-12 pb-16 relative overflow-hidden px-4 sm:px-6 md:px-0">
       {/* Decorative Illustration */}
       <img
         src="/subscribe.png"
@@ -61,7 +58,7 @@ const NewsLetter = () => {
 
       {/* Headline */}
       <h3 className="text-3xl sm:text-4xl font-medium text-black mb-4">
-          Subscribe to Our Newsletter
+        Subscribe to Our Newsletter
       </h3>
       <p className="text-gray-600 mb-8 text-lg sm:text-lg">
         Stay updated with the latest property listings and real estate trends.
@@ -73,15 +70,12 @@ const NewsLetter = () => {
           e.preventDefault();
           handleSubscribe();
         }}
-        className="flex flex-col md:flex-row items-center gap-3 md:gap-0 max-w-2xl w-full z-10 px-4"
+        className="flex flex-col md:flex-row items-center gap-3 md:gap-0 max-w-2xl w-full z-10"
       >
         <div className="relative flex-1 group w-full">
           {/* Mail Icon */}
           <Mail
-            className="absolute left-3 top-1/2 transform 
-            -translate-y-1/2 text-gray-400 group-focus-within:text-orange-600 
-            transition-all duration-300 group-focus-within:animate-pulse
-          "
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-all duration-300 group-focus-within:animate-pulse"
             size={20}
           />
           <input
@@ -89,23 +83,14 @@ const NewsLetter = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="pl-10 pr-4 py-3 md:py-4 w-full rounded-md 
-              md:rounded-l-md md:rounded-r-none border border-gray-300 
-              focus:outline-none focus:ring-2 focus:ring-orange-500 
-              dark:text-black transition-all
-            "
+            className="pl-10 pr-4 py-3 md:py-4 w-full rounded-md md:rounded-l-md md:rounded-r-none border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-black transition-all"
             required
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full md:w-auto md:px-12 px-8 py-3 
-          md:py-4 bg-gray-900 text-white font-normal 
-          rounded-md md:rounded-r-md md:rounded-l-none 
-          transition-all transform hover:scale-105 hover:shadow-lg 
-          hover:shadow-blue-400/50 disabled:opacity-50
-        "
+          className="w-full md:w-auto md:px-12 px-8 py-3 md:py-4 bg-gray-900 text-white font-normal rounded-md md:rounded-r-md md:rounded-l-none transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 disabled:opacity-50"
         >
           {loading ? "Subscribing..." : "Subscribe"}
         </button>
@@ -116,6 +101,7 @@ const NewsLetter = () => {
         <p className="text-sm text-gray-700 dark:text-gray-300 mt-3 z-10">{message}</p>
       )}
     </div>
+
   );
 };
 

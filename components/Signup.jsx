@@ -291,7 +291,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       {/* Left Image for Signup / Forgot (desktop only) */}
       {["signup", "forgot"].includes(mode) && (
-        <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-b from-orange-200 to-orange-100 p-8">
+        <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-b from-blue-200 to-blue-100 p-8">
           <img
             src={mode === "signup" ? "/signup.png" : "/forgot-password.png"}
             alt="Illustration"

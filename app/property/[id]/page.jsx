@@ -155,8 +155,8 @@ export default function PropertyPage() {
                         onClick={() => setMainImage(img)}
                         className={`relative cursor-pointer overflow-hidden border rounded-lg transition-all duration-300 ${
                         mainImage === img
-                            ? "ring-2 ring-orange-500"
-                            : "hover:ring-2 hover:ring-orange-300"
+                            ? "ring-2 ring-blue-500"
+                            : "hover:ring-2 hover:ring-blue-300"
                         }`}
                     >
                         <Image
