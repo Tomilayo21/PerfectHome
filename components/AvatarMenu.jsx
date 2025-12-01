@@ -14,7 +14,9 @@ import { XCircle, CheckCircle } from "lucide-react";
 
 
 export default function AvatarMenu() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isGoogleUser = session?.user?.authProvider === "google";
+
   const router = useRouter();
   const user = session?.user;
   const { getCartCount } = useAppContext();
@@ -42,10 +44,11 @@ export default function AvatarMenu() {
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
   const [passwordErrors, setPasswordErrors] = useState([]);
-  const isGoogleUser = session?.user?.authProvider === "google";
 
 
   useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
+
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
