@@ -165,7 +165,7 @@ export default function ContactAgentButton({ property }) {
 
       {/* Call */}
       {/* Use both href and onClick fallback */}
-      <a
+      {/* <a
         href={callHref}
         onClick={(e) => {
           // allow normal anchor navigation but also fire fallback to be safe
@@ -177,7 +177,7 @@ export default function ContactAgentButton({ property }) {
         aria-label={`Call agent at ${agentNumber}`}
       >
         Call <Phone size={16} />
-      </a>
+      </a> */}
 
       {/* SMS */}
       <a
