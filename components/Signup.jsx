@@ -53,6 +53,8 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
     }
   }, [searchParams]);
 
+
+
   // Password criteria
   const password = form.password || "";
   const passCriteria = {

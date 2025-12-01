@@ -25,6 +25,21 @@ export default function SignupPage() {
     }
   }, [status, router]);
 
+  useEffect(() => {
+    const navbar = document.getElementById("main-navbar");
+    if (navbar) {
+      const updateHeight = () => {
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty("--navbar-height", height + "px");
+      };
+
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+  }, []);  
+
   const handleUnlockSuccess = () => {
     setSuperAdminVerified(true);
     setShowUnlockPrompt(false);
@@ -94,7 +109,7 @@ export default function SignupPage() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-1 flex justify-center items-center mt-16 bg-gray-50 dark:bg-gray-50 px-4 md:px-16 lg:px-32 py-16">
+      <main className="flex-1 flex justify-center items-center pt-[calc(var(--navbar-height)+1rem)] bg-gray-50 dark:bg-gray-50 px-4 md:px-16 lg:px-32 py-16">
         <Signup />
       </main>
 
