@@ -47,7 +47,7 @@ export default async function SingleBlog({ params }) {
     <>
         <Navbar />
         <AdjustNavbarHeight />
-      <div className="bg-gray-50">
+      <div className="bg-gray-50 mb-16">
 
         
         

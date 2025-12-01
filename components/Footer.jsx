@@ -104,7 +104,7 @@ export default function Footer() {
   const logoSrc = themeMode === "dark" ? darkLogoUrl || lightLogoUrl : lightLogoUrl || darkLogoUrl;
 
   return (
-    <footer className="bg-blue-200/60 dark:bg-blue-200/60  dark:border-gray-800 text-gray-700 dark:text-gray-400">
+    <footer className="bg-blue-200/60 dark:bg-blue-900/80  dark:border-gray-800 text-gray-700 dark:text-gray-400">
 
       <div className="flex flex-col md:flex-row items-start justify-between px-6 md:px-16 lg:px-32 gap-6 md:gap-12 py-12 md:py-16 border-b border-gray-200/70 dark:border-gray-800/70">
         {/* Logo & Description */}
