@@ -115,8 +115,6 @@
 
 
 
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -126,9 +124,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactAgentButton from "./ContactAgentButton"; 
 import { useAppContext } from "@/context/AppContext";
 
+const swipeConfidenceThreshold = 1000; // tweak this to control flick sensitivity
+const swipePower = (offset, velocity) => Math.abs(offset) * velocity;
+
 const RelatedPropertyCard = ({ property }) => {
   const [hovered, setHovered] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [direction, setDirection] = useState(0); // 1 = next, -1 = prev
   const { router, currency } = useAppContext();
 
   if (!property || property.visible === false) return null;
@@ -140,14 +142,27 @@ const RelatedPropertyCard = ({ property }) => {
 
   const images = property.images?.length > 0 ? property.images : ["/placeholder.jpg"];
 
-  // Carousel navigation
-  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  const nextImage = () => {
+    setDirection(1);
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
 
-  // Swipe detection
+  const prevImage = () => {
+    setDirection(-1);
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Handle drag/swipe with inertia
   const handleDragEnd = (event, info) => {
-    if (info.offset.x < -50) nextImage();
-    else if (info.offset.x > 50) prevImage();
+    const swipe = swipePower(info.offset.x, info.velocity.x);
+    if (swipe < -swipeConfidenceThreshold) nextImage();
+    else if (swipe > swipeConfidenceThreshold) prevImage();
+  };
+
+  const variants = {
+    enter: (direction) => ({ x: direction > 0 ? 300 : -300, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction) => ({ x: direction > 0 ? -300 : 300, opacity: 0 }),
   };
 
   return (
@@ -158,19 +173,29 @@ const RelatedPropertyCard = ({ property }) => {
     >
       {/* Image Carousel */}
       <div className="relative h-40 w-full overflow-hidden">
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          onDragEnd={handleDragEnd}
-          className="relative h-full w-full"
-        >
-          <Image
-            src={images[currentImage]}
-            alt={property.title || "Property"}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        </motion.div>
+        <AnimatePresence custom={direction} initial={false}>
+          <motion.div
+            key={currentImage}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1} // allow full swipe effect
+            onDragEnd={handleDragEnd}
+            className="absolute inset-0"
+          >
+            <Image
+              src={images[currentImage]}
+              alt={property.title || "Property"}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
 
         {/* Carousel Arrows */}
         {images.length > 1 && (
@@ -226,14 +251,12 @@ const RelatedPropertyCard = ({ property }) => {
           {property.title}
         </h3>
 
-        {/* Location */}
         {property.address && (
           <p className="flex items-center gap-1 text-gray-500 text-xs md:text-sm">
             <MapPin size={12} className="text-blue-500" /> {property.address}, {property.city}
           </p>
         )}
 
-        {/* Animated Badges */}
         <div className="flex flex-wrap gap-2 mt-1">
           {property.type && (
             <motion.span
@@ -257,7 +280,6 @@ const RelatedPropertyCard = ({ property }) => {
           )}
         </div>
 
-        {/* Bedrooms / Bathrooms */}
         <p className="text-gray-500 text-xs md:text-sm mt-1">
           {property.bedrooms} Bed • {property.bathrooms} Bath • {property.toilets} Toilet
         </p>
