@@ -113,11 +113,6 @@
 
 
 
-
-
-
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -164,23 +159,36 @@ export default function ContactAgentButton({ property }) {
   // -----------------------------
   const [copied, setCopied] = useState(false);
 
-  const handleInitialCallTap = async () => {
+    const handleInitialCallTap = async () => {
     try {
-      await navigator.clipboard.writeText(phone);
-      setCopied(true);
+        await navigator.clipboard.writeText(phone);
+        setCopied(true);
 
-      toast.success("Number copied!", {
-        duration: 2000,
-        style: {
-          background: "#000",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
+        toast.custom(
+        (t) => (
+            <div
+            className={`max-w-md w-full bg-blue-50 dark:bg-blue-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
+                t.visible
+                ? "translate-x-0 opacity-100"
+                : "translate-x-10 opacity-0"
+            }`}
+            >
+            <Phone className="text-blue-600 dark:text-blue-300" size={20} />
+            <p className="text-sm font-medium text-blue-700 dark:text-blue-200">
+                Number copied!
+            </p>
+            </div>
+        ),
+        {
+            duration: 3000,
+            position: "top-right",
+        }
+        );
     } catch (e) {
-      setCopied(true);
+        setCopied(true);
     }
-  };
+    };
+
 
   return (
     <div className="flex flex-col gap-4">

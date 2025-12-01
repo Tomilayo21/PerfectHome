@@ -301,25 +301,19 @@ export default function PropertyPage() {
 
 
           {/* --- Buttons --- */}
-          <div className="flex flex-wrap gap-4 mt-6">
-            {/* <button
-              onClick={handleLike}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg shadow-md transition ${
-                liked
-                  ? "bg-red-500 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
-            >
-              <Heart size={18} fill={liked ? "white" : "none"} />
-              {liked ? "Saved" : "Save Property"}
-            </button> */}
+          <div className="mt-8">
+            <p className=" italic text-gray-700 dark:text-gray-700 mb-3 text-sm md:text-base">
+              Have questions about this property? Contact the agent below for more details or to book an inspection.
+            </p>
 
-            <ContactAgentButton 
-              property={property} 
-              agentNumber={property.agentPhone} 
-            />
-
+            <div className="flex flex-wrap gap-4">
+              <ContactAgentButton 
+                property={property} 
+                agentNumber={property.agentPhone} 
+              />
+            </div>
           </div>
+
 
           {/* --- Related --- */}
           {related?.length > 0 && (
