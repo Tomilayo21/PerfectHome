@@ -330,7 +330,7 @@ export default function PropertyPage() {
                 lg:grid-cols-4
                 xl:grid-cols-5
                 2xl:grid-cols-6
-                gap-2 px-3
+                gap-3 px-3
               ">
                 {related.map((item) => (
                   <div
