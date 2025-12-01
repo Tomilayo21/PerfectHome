@@ -15,7 +15,9 @@ import { XCircle, CheckCircle } from "lucide-react";
 
 export default function AvatarMenu() {
   const { data: session, status } = useSession();
+  const isLoading = status === "loading";
   const isGoogleUser = session?.user?.authProvider === "google";
+
 
   const router = useRouter();
   const user = session?.user;
@@ -47,8 +49,6 @@ export default function AvatarMenu() {
 
 
   useEffect(() => setMounted(true), []);
-    if (!mounted) return null;
-
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
@@ -630,7 +630,7 @@ export default function AvatarMenu() {
               )}
 
               {/* Security */}
-              {tab === "security" && (
+              {!isLoading && tab === "security" && (
                 <div className="space-y-5">
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                     <p className="font-normal text-black dark:text-gray-200">Password</p>
