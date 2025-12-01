@@ -292,7 +292,7 @@ export default function AdminSettings() {
                         border border-transparent 
                       "
                     >
-                      <div className="flex font-thin items-center gap-2 mb-1">
+                      <div className="flex font-normal items-center gap-2 mb-1">
                         <span className="">Site Metadata</span>
                       </div>
                       <p className="text-xs text-left font-thin text-gray-700 dark:text-gray-300">
@@ -309,10 +309,10 @@ export default function AdminSettings() {
                       dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 
                       dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg"
                     >
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex font-normal items-center gap-2 mb-1">
                         <span className="">Footer Settings</span>
                       </div>
-                      <p className="text-xs text-left">
+                      <p className="text-xs font-thin text-left">
                         Customize footer content such as contact info and branding.
                       </p>
                     </button>
@@ -654,7 +654,7 @@ export default function AdminSettings() {
                        rounded-xl shadow dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 
                         dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg"
                     >
-                      <span className="font-thin mb-1">About Us</span>
+                      <span className="font-normal mb-1">About Us</span>
                       <p className="text-xs font-thin text-left">Edit your company's story and purpose.</p>
                     </button>
 
@@ -664,7 +664,7 @@ export default function AdminSettings() {
                        rounded-xl shadow dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 
                         dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg"
                     >
-                      <span className="font-thin mb-1">Partner With Us</span>
+                      <span className="font-normal mb-1">Partner With Us</span>
                       <p className="text-xs font-thin text-left">Manage partnership information and callouts.</p>
                     </button>
 
@@ -771,7 +771,7 @@ export default function AdminSettings() {
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-normal">Terms & Conditions</span>
                       </div>
-                      <p className="text-xs text-left">
+                      <p className="text-xs font-thin text-left">
                         Outline the rules for using your service.
                       </p>
                     </button>
@@ -786,7 +786,7 @@ export default function AdminSettings() {
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-normal">FAQs</span>
                       </div>
-                      <p className="text-xs text-left">
+                      <p className="text-xs font-thin text-left">
                         Manage common legal-related questions and answers.
                       </p>
                     </button>
