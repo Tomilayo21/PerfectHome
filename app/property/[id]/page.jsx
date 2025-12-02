@@ -125,7 +125,7 @@ export default function PropertyPage() {
                 </div>
 
                 {/* --- Thumbnails (Desktop) --- */}
-                <div className="hidden md:flex flex-col gap-3 overflow-y-auto max-h-[500px] pr-1 w-full">
+                <div className="hidden md:flex flex-col gap-3 overflow-y-auto max-h-[500px] pr-1 pt-1 w-full pl-2">
                     {property?.images?.slice(0, 6)?.map((img, i) => (
                     <div
                         key={i}
@@ -148,7 +148,7 @@ export default function PropertyPage() {
                 </div>
 
                 {/* --- Mobile Grid --- */}
-                <div className="flex md:hidden gap-3 overflow-x-auto scrollbar-hide py-2">
+                <div className="flex md:hidden gap-3 overflow-x-auto scrollbar-hide py-2 px-2">
                   {property?.images?.slice(0, 10)?.map((img, i) => (
                     <div
                       key={i}

@@ -50,7 +50,7 @@ const RelatedPropertyCard = ({ property }) => {
 
   return (
     <div
-      className="group relative w-full sm:w-[180px] md:w-[220px] cursor-pointer rounded-sm border border-gray-100 dark:border-gray-100 bg-white dark:bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+      className="group relative w-full sm:w-[180px] md:w-[220px] cursor-pointer rounded-sm border border-gray-100 dark:border-gray-100 bg-white dark:bg-white shadow-sm hover:shadow-md transition-all duration-300"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -121,7 +121,7 @@ const RelatedPropertyCard = ({ property }) => {
                 >
                   View Details
                 </button>
-                <ContactAgentButton property={property} />
+                {/* <ContactAgentButton property={property} /> */}
               </div>
             </motion.div>
           )}
