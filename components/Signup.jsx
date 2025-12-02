@@ -43,6 +43,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showVerifyPassword, setShowVerifyPassword] = useState(false);
+  
 
   // Detect reset token in URL
   useEffect(() => {
@@ -129,11 +130,11 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
-
     setLoading(true);
+
     try {
       if (mode === "signup") {
-        // ✅ Signup mode
+        // Signup mode
         const res = await fetch("/api/auth/signup", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -148,9 +149,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
                 (t) => (
                   <div
                     className={`max-w-md w-full bg-red-50 dark:bg-red-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
-                      t.visible
-                        ? "translate-x-0 opacity-100"
-                        : "translate-x-10 opacity-0"
+                      t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
                     }`}
                   >
                     <XCircle className="text-red-500" size={20} />
@@ -175,9 +174,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
           (t) => (
             <div
               className={`max-w-md w-full bg-green-50 dark:bg-green-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
-                t.visible
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
               }`}
             >
               <CheckCircle className="text-green-600" size={20} />
@@ -190,15 +187,9 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
         );
 
         setMode("login");
-        setForm({
-          name: "",
-          username: "",
-          email: "",
-          password: "",
-          verifyPassword: "",
-        });
+        setForm({ name: "", username: "", email: "", password: "", verifyPassword: "" });
       } else if (mode === "login") {
-        // ✅ Login mode
+        // Login mode
         const res = await signIn("credentials", {
           redirect: false,
           email: form.email,
@@ -207,16 +198,39 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
 
         if (res.error) throw new Error(res.error);
 
+        // Fetch real geolocation
+        let locationData = { ip: "Unknown", city: "Unknown", country: "Unknown" };
+        try {
+          const locRes = await fetch("https://ipapi.co/json/");
+          if (locRes.ok) locationData = await locRes.json();
+        } catch (err) {
+          console.warn("Failed to fetch location", err);
+        }
+
+        // Build device info
+        const deviceInfo = {
+          os: navigator.platform || "Unknown",
+          browser: navigator.userAgent || "Unknown",
+          ip: locationData.ip || "Unknown",
+          city: locationData.city || "Unknown",
+          country: locationData.country_name || "Unknown",
+        };
+
+        // Track session
+        await fetch("/api/user/track-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(deviceInfo),
+        });
+
+        // Success toast
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
-
         toast.custom(
           (t) => (
             <div
               className={`max-w-md w-full bg-blue-50 dark:bg-blue-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
-                t.visible
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
               }`}
             >
               <CheckCircle className="text-blue-600" size={20} />
@@ -231,7 +245,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
         if (onSuccess) onSuccess();
         window.location.href = "/";
       } else if (mode === "forgot") {
-        // ✅ Forgot password mode
+        // Forgot password mode
         const res = await fetch("/api/auth/forgot-password", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -245,9 +259,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
           (t) => (
             <div
               className={`max-w-md w-full bg-yellow-50 dark:bg-yellow-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
-                t.visible
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
               }`}
             >
               <CheckCircle className="text-yellow-600" size={20} />
@@ -259,7 +271,6 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
           { duration: 3000, position: "top-right" }
         );
 
-        // Reset email field
         setResetEmail("");
         setMode("login");
       }
@@ -269,9 +280,7 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
         (t) => (
           <div
             className={`max-w-md w-full bg-red-50 dark:bg-red-900 shadow-lg rounded-lg flex items-center gap-3 p-4 transform transition-all duration-300 ${
-              t.visible
-                ? "translate-x-0 opacity-100"
-                : "translate-x-10 opacity-0"
+              t.visible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
             }`}
           >
             <XCircle className="text-red-500" size={20} />
@@ -282,12 +291,12 @@ export default function AuthForm({ initialMode = "login", onSuccess }) {
         ),
         { duration: 4000, position: "top-right" }
       );
-
       setMessage(err.message);
     } finally {
       setLoading(false);
     }
   }
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">

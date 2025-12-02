@@ -6,6 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import DeleteAccountModal from "./DeleteAccountModal";
+import ActiveDevices from "./ActiveDevices";
 import Link from "next/link";
 import { useAppContext } from "@/context/AppContext";
 import { UAParser } from "ua-parser-js";
@@ -721,46 +722,8 @@ export default function AvatarMenu() {
                   </form>
 
                   {/* Active Sessions / Devices */}
-                  <div className="bg-gray-50 dark:bg-black border dark:border-white p-3 rounded-lg text-xs space-y-3">
-                    <p className="text-gray-700 dark:text-gray-300 font-medium mb-1">Active Devices</p>
 
-                    {session.user.sessions?.length > 0 ? (
-                      // Remove duplicates and sort by lastActive descending
-                      [...new Map(
-                        session.user.sessions.map(s => [`${s.os}-${s.browser}-${s.ip}`, s])
-                      ).values()]
-                        .sort((a, b) => new Date(b.lastActive) - new Date(a.lastActive))
-                        .map((s, idx) => (
-                          <div
-                            key={idx}
-                            className="flex justify-between items-start border-b dark:border-gray-700 pb-2 last:border-b-0"
-                          >
-                            <div className="space-y-1">
-                              <p className="text-gray-500 dark:text-gray-400">{s.os} • {s.browser}</p>
-                              <p className="text-gray-500 dark:text-gray-400">{s.city}, {s.country}</p>
-                              <p className="text-gray-500 dark:text-gray-400">
-                                Last Active: {new Date(s.lastActive).toLocaleString()}
-                              </p>
-                            </div>
-                            <button
-                              className="text-red-500 text-xs hover:underline mt-1"
-                              onClick={async () => {
-                                const res = await fetch("/api/user/logout-session", {
-                                  method: "POST",
-                                  body: JSON.stringify({ token: s.token }),
-                                  headers: { "Content-Type": "application/json" },
-                                });
-                                if (res.ok) router.refresh();
-                              }}
-                            >
-                              Log out
-                            </button>
-                          </div>
-                        ))
-                    ) : (
-                      <p className="text-gray-500 dark:text-gray-400">No active devices found.</p>
-                    )}
-                  </div>
+                  <ActiveDevices />
 
 
                   {/* Delete Account */}
