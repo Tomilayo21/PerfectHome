@@ -143,6 +143,24 @@ export default function PropertyFilterBar() {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const [localFilters, setLocalFilters] = useState(() => {
+  const paramsObj = Object.fromEntries(searchParams.entries());
+    return {
+      bedrooms: paramsObj.bedrooms || "",
+      bathrooms: paramsObj.bathrooms || "",
+      toilets: paramsObj.toilets || "",
+      area: paramsObj.area || "",
+      min: paramsObj.min || "",
+      max: paramsObj.max || "",
+      type: paramsObj.type || "",
+      category: paramsObj.category || "",
+      state: paramsObj.state || "",
+      feature: paramsObj.feature || "",
+      sort: paramsObj.sort || "",
+    };
+  });
+
+
   return (
     <div className="flex flex-col gap-4 md:gap-6">
       {/* summary chips */}
@@ -174,10 +192,14 @@ export default function PropertyFilterBar() {
       </div>
 
       {/* filters */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-6">
-        <div className="w-full md:w-auto">
-          <button className="flex items-center justify-between w-full md:hidden bg-white border border-gray-200 shadow-sm rounded-2xl px-4 py-3"
-            onClick={() => setShowFilters(!showFilters)}>
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-6">
+        {/* Left: Filters + Apply button */}
+        <div className="w-full md:flex-1">
+          {/* Mobile toggle button */}
+          <button
+            className="flex items-center justify-between w-full md:hidden bg-white border border-gray-200 shadow-sm rounded-2xl px-4 py-3"
+            onClick={() => setShowFilters(!showFilters)}
+          >
             <div className="flex items-center gap-2">
               <SlidersHorizontal className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-normal text-black">Filters</span>
@@ -185,8 +207,9 @@ export default function PropertyFilterBar() {
             <span className="text-xs text-gray-500">{showFilters ? "Hide" : "Show"}</span>
           </button>
 
+          {/* Collapsible filters */}
           <div className={`transition-all duration-300 overflow-hidden ${showFilters ? "max-h-screen mt-3" : "max-h-0"} md:max-h-none md:mt-0`}>
-            <div className="flex flex-col sm:flex-row flex-wrap items-start gap-4 bg-white border border-gray-200 shadow-sm rounded-2xl px-4 py-3">
+            <div className="flex flex-wrap items-start gap-4 bg-white border border-gray-200 shadow-sm rounded-2xl px-4 py-3">
               {/* Price */}
               <div className="flex flex-col w-full sm:w-auto">
                 <label className="text-xs font-medium text-gray-500 mb-1">Price</label>
@@ -196,17 +219,12 @@ export default function PropertyFilterBar() {
                     name="min"
                     placeholder="Min"
                     className="text-xs rounded-lg px-3 py-2 w-24 border border-gray-300 text-black dark:text-black focus:ring-2 focus:ring-black outline-none"
-                    defaultValue={formatWithCommas(searchParams.get("min") || "")}
+                    value={localFilters.min ? formatWithCommas(localFilters.min) : ""}
                     onChange={(e) => {
-                      const raw = e.target.value.replace(/,/g, ""); // remove commas
-                      if (raw === "") {
-                        handleFilterChange("min", "");
-                        e.target.value = "";
-                        return;
+                      const raw = e.target.value.replace(/,/g, "");
+                      if (raw === "" || (!isNaN(raw) && Number(raw) >= 0)) {
+                        setLocalFilters(prev => ({ ...prev, min: raw }));
                       }
-                      if (isNaN(raw) || Number(raw) < 0) return; // 🚫 skip invalid or negative
-                      e.target.value = formatWithCommas(raw);
-                      handleFilterChange("min", raw);
                     }}
                   />
                   <span className="text-gray-400 text-xs">—</span>
@@ -215,36 +233,45 @@ export default function PropertyFilterBar() {
                     name="max"
                     placeholder="Max"
                     className="text-xs rounded-lg px-3 py-2 w-24 border border-gray-300 text-black dark:text-black focus:ring-2 focus:ring-black outline-none"
-                    defaultValue={formatWithCommas(searchParams.get("max") || "")}
+                    value={localFilters.max ? formatWithCommas(localFilters.max) : ""}
                     onChange={(e) => {
                       const raw = e.target.value.replace(/,/g, "");
-                      if (raw === "") {
-                        handleFilterChange("max", "");
-                        e.target.value = "";
-                        return;
+                      if (raw === "" || (!isNaN(raw) && Number(raw) >= 0)) {
+                        setLocalFilters(prev => ({ ...prev, max: raw }));
                       }
-                      if (isNaN(raw) || Number(raw) < 0) return; // 🚫 skip invalid or negative
-                      e.target.value = formatWithCommas(raw);
-                      handleFilterChange("max", raw);
                     }}
                   />
                 </div>
               </div>
 
+              {/* Select filters */}
+              <SelectFilter label="Type" name="type" options={propertyTypes} localFilters={localFilters} setLocalFilters={setLocalFilters} triggerClasses={triggerClasses} itemClasses={itemClasses} />
+              <SelectFilter label="Category" name="category" options={propertyCategories} localFilters={localFilters} setLocalFilters={setLocalFilters} triggerClasses={triggerClasses} itemClasses={itemClasses} />
+              <SelectFilter label="State" name="state" options={states} localFilters={localFilters} setLocalFilters={setLocalFilters} triggerClasses={triggerClasses} itemClasses={itemClasses} />
+              <SelectFilter label="Feature" name="feature" options={features} localFilters={localFilters} setLocalFilters={setLocalFilters} triggerClasses={triggerClasses} itemClasses={itemClasses} />
 
-
-              {/* Select filters (type, category, state, feature) */}
-              <SelectFilter label="Type" name="type" options={propertyTypes} searchParams={searchParams} onChange={(n,v) => handleFilterChange(n,v,{ immediate:true })} triggerClasses={triggerClasses} itemClasses={itemClasses} />
-              <SelectFilter label="Category" name="category" options={propertyCategories} searchParams={searchParams} onChange={(n,v) => handleFilterChange(n,v,{ immediate:true })} triggerClasses={triggerClasses} itemClasses={itemClasses} />
-              <SelectFilter label="State" name="state" options={states} searchParams={searchParams} onChange={(n,v) => handleFilterChange(n,v,{ immediate:true })} triggerClasses={triggerClasses} itemClasses={itemClasses} />
-              <SelectFilter label="Feature" name="feature" options={features} searchParams={searchParams} onChange={(n,v) => handleFilterChange(n,v,{ immediate:true })} triggerClasses={triggerClasses} itemClasses={itemClasses} />
-
-              {/* Numeric filters (debounced) */}
-              <NumberInputFilter label="Bedrooms" name="bedrooms" defaultValue={searchParams.get("bedrooms") || ""} onChange={(n,v) => handleFilterChange(n,v)} />
-              <NumberInputFilter label="Bathrooms" name="bathrooms" defaultValue={searchParams.get("bathrooms") || ""} onChange={(n,v) => handleFilterChange(n,v)} />
-              <NumberInputFilter label="Toilets" name="toilets" defaultValue={searchParams.get("toilets") || ""} onChange={(n,v) => handleFilterChange(n,v)} />
-              <NumberInputFilter label="Area (sqm)" name="area" defaultValue={searchParams.get("area") || ""} onChange={(n,v) => handleFilterChange(n,v)} />
+              {/* Numeric filters */}
+              <NumberInputFilter label="Bedrooms" name="bedrooms" localFilters={localFilters} setLocalFilters={setLocalFilters} />
+              <NumberInputFilter label="Bathrooms" name="bathrooms" localFilters={localFilters} setLocalFilters={setLocalFilters} />
+              <NumberInputFilter label="Toilets" name="toilets" localFilters={localFilters} setLocalFilters={setLocalFilters} />
+              <NumberInputFilter label="Area (sqm)" name="area" localFilters={localFilters} setLocalFilters={setLocalFilters} />
             </div>
+          </div>
+
+          {/* Apply Filters button */}
+          <div className="mt-3 flex justify-end">
+            <button
+              onClick={() => {
+                const params = new URLSearchParams();
+                for (const [key, value] of Object.entries(localFilters)) {
+                  if (value !== "" && value != null) params.set(key, value);
+                }
+                router.push(`${window.location.pathname}?${params.toString()}`);
+              }}
+              className="px-4 py-2 w-full sm:w-auto bg-blue-700/80 text-white rounded-md hover:bg-blue-500 transition"
+            >
+              Apply Filters
+            </button>
           </div>
         </div>
 
@@ -275,8 +302,8 @@ export default function PropertyFilterBar() {
                   { label: "Price (low → high)", value: "asc price" },
                   { label: "Price (high → low)", value: "desc price" },
                   { label: "Newest", value: "desc date" },
-                  { label: "Oldest", value: "asc date" },
-                ].map((item) => (
+                  { label: "Oldest", value: "asc date" }
+                ].map(item => (
                   <Select.Item key={item.value} value={item.value} className={itemClasses}>{item.label}</Select.Item>
                 ))}
               </Select.Viewport>
@@ -284,25 +311,43 @@ export default function PropertyFilterBar() {
           </Select.Root>
         </div>
       </div>
+
+
     </div>
   );
 }
 
 /* ---------------- reusable small components ---------------- */
 
-function SelectFilter({ label, name, options, searchParams, onChange, triggerClasses, itemClasses }) {
+function SelectFilter({ label, name, options, localFilters, setLocalFilters, triggerClasses, itemClasses }) {
   return (
     <div className="flex flex-col w-full sm:w-auto relative">
       <label className="text-xs font-medium text-gray-500 mb-1 block">{label}</label>
-      <Select.Root defaultValue={searchParams.get(name) || undefined} onValueChange={(value) => onChange(name, value)}>
+      <Select.Root
+        value={localFilters[name] || undefined}
+        onValueChange={(value) =>
+          setLocalFilters((prev) => ({ ...prev, [name]: value }))
+        }
+      >
         <Select.Trigger className={`${triggerClasses} w-auto min-w-[8rem] flex items-center justify-between`}>
-          <div className="text-gray-500 text-xs">{searchParams.get(name) || `Select ${label.toLowerCase()}`}</div>
+          <div className="text-gray-500 text-xs">
+            {localFilters[name] || `Select ${label.toLowerCase()}`}
+          </div>
           <Select.Icon><ChevronDown className="w-4 h-4 text-gray-500 ml-2" /></Select.Icon>
         </Select.Trigger>
 
-        <Select.Content position="popper" side="bottom" align="start" className="bg-white border border-gray-300 rounded-lg shadow-lg z-50 mt-1 max-h-80 overflow-y-auto">
+        <Select.Content
+          position="popper"
+          side="bottom"
+          align="start"
+          className="bg-white border border-gray-300 rounded-lg shadow-lg z-50 mt-1 max-h-80 overflow-y-auto"
+        >
           <Select.Viewport className="p-2">
-            {options.map((opt) => <Select.Item key={opt} value={opt} className={itemClasses}>{opt}</Select.Item>)}
+            {options.map((opt) => (
+              <Select.Item key={opt} value={opt} className={itemClasses}>
+                {opt}
+              </Select.Item>
+            ))}
           </Select.Viewport>
         </Select.Content>
       </Select.Root>
@@ -310,7 +355,7 @@ function SelectFilter({ label, name, options, searchParams, onChange, triggerCla
   );
 }
 
-function NumberInputFilter({ label, name, defaultValue, onChange }) {
+function NumberInputFilter({ label, name, localFilters, setLocalFilters }) {
   return (
     <div className="flex flex-col w-full sm:w-auto">
       <label className="text-xs font-medium text-gray-500 mb-1">{label}</label>
@@ -318,21 +363,16 @@ function NumberInputFilter({ label, name, defaultValue, onChange }) {
         type="number"
         name={name}
         placeholder="0"
-        min="0" // 👈 prevents typing negatives using arrows or keyboard
+        min="0"
         className="text-xs rounded-lg px-3 py-2 w-24 border text-black dark:text-black border-gray-300 focus:ring-2 focus:ring-black outline-none"
-        defaultValue={defaultValue}
+        value={localFilters[name] || ""}
         onChange={(e) => {
           const value = e.target.value;
-          if (value === "" || Number(value) >= 0) {
-            onChange(name, value);
-          } else {
-            // reset negative input to 0 if user tries
-            e.target.value = 0;
-            onChange(name, 0);
-          }
+          setLocalFilters((prev) => ({ ...prev, [name]: value }));
         }}
       />
     </div>
   );
 }
+
 
