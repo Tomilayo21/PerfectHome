@@ -290,31 +290,6 @@ export default function AvatarMenu() {
     return errors;
   }
 
-  useEffect(() => {
-    const parser = new UAParser();
-    const result = parser.getResult();
-    const os = result.os.name || "Unknown OS";
-    const browser = result.browser.name || "Unknown Browser";
-
-    setDeviceInfo({ os, browser });
-
-    fetch("https://ipapi.co/json/")
-      .then(res => res.json())
-      .then(data => {
-        const city = data.city || "Unknown City";
-        const country = data.country_name || "Unknown Country";
-        setLocation(`${city}, ${country}`);
-
-        // Save device info to backend
-        fetch("/api/user/track-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ os, browser, city, country }),
-        });
-      })
-      .catch(() => setLocation("Unknown Location"));
-  }, []);
-
 
 
   return (

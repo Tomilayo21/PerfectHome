@@ -16,53 +16,59 @@ export default function ActiveDevices() {
     }
   }, [session]);
 
-  const handleLogout = async (token) => {
+    const handleLogout = async (token) => {
     const confirmLogout = await new Promise((resolve) => {
-      toast(
-        (t) => (
-          <div className="flex flex-col space-y-2 p-2">
+        toast((t) => (
+        <div className="flex flex-col space-y-2 p-2">
             <p>Are you sure you want to remove this device?</p>
             <div className="flex justify-end space-x-2">
-              <button
+            <button
                 className="px-2 py-1 text-sm bg-gray-200 rounded hover:bg-gray-300"
                 onClick={() => { toast.dismiss(t.id); resolve(false); }}
-              >
+            >
                 Cancel
-              </button>
-              <button
+            </button>
+            <button
                 className="px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={() => { toast.dismiss(t.id); resolve(true); }}
-              >
+            >
                 Remove
-              </button>
+            </button>
             </div>
-          </div>
-        ),
-        { duration: Infinity }
-      );
+        </div>
+        ), { duration: Infinity });
     });
 
     if (!confirmLogout) return;
 
     try {
-      const res = await fetch("/api/user/logout-session", {
+        const res = await fetch("/api/user/logout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),
-      });
+        });
 
-      if (!res.ok) {
         const data = await res.json();
+
+        if (!res.ok) {
         toast.error(data?.message || "Failed to remove device");
         return;
-      }
+        }
 
-      toast.success("Device removed successfully!");
-      setSessions((prev) => prev.filter((s) => s.token !== token));
+        toast.success("Device removed successfully!");
+
+        // 🔥 If user removed their own active device → force real logout
+        if (token === session?.user?.currentToken) {
+        return signOut({ callbackUrl: "/" });
+        }
+
+        // Remove from UI
+        setSessions((prev) => prev.filter((s) => s.token !== token));
     } catch (err) {
-      toast.error("Failed to remove device");
+        toast.error("Failed to remove device");
     }
-  };
+    };
+
 
   if (status === "loading") return <p>Loading devices...</p>;
   if (!session?.user) return <p>No user session found.</p>;
