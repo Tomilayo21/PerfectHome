@@ -148,27 +148,25 @@ export default function PropertyPage() {
                 </div>
 
                 {/* --- Mobile Grid --- */}
-                <div className="grid grid-cols-2 gap-3 md:hidden">
-                    {property?.images?.slice(0, 6)?.map((img, i) => (
+                <div className="flex md:hidden gap-3 overflow-x-auto scrollbar-hide py-2">
+                  {property?.images?.slice(0, 10)?.map((img, i) => (
                     <div
-                        key={i}
-                        onClick={() => setMainImage(img)}
-                        className={`relative cursor-pointer overflow-hidden border rounded-lg transition-all duration-300 ${
-                        mainImage === img
-                            ? "ring-2 ring-blue-500"
-                            : "hover:ring-2 hover:ring-blue-300"
-                        }`}
+                      key={i}
+                      onClick={() => setMainImage(img)}
+                      className={`min-w-[40%] max-w-[40%] cursor-pointer rounded-lg overflow-hidden border transition-all duration-300 flex-shrink-0
+                        ${mainImage === img ? "ring-2 ring-blue-500" : "hover:ring-2 hover:ring-blue-300"}`}
                     >
-                        <Image
+                      <Image
                         src={img}
                         alt={`Thumbnail ${i}`}
-                        width={400}
-                        height={400}
+                        width={300}
+                        height={300}
                         className="w-full h-32 object-cover rounded-lg"
-                        />
+                      />
                     </div>
-                    ))}
+                  ))}
                 </div>
+
             </div>
 
             {/* --- Property Video Section --- */}
