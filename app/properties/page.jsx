@@ -206,13 +206,14 @@ const AllProperties = () => {
           </div>
 
           <h2
-            className="font-semibold text-2xl md:text-2xl mt-2 text-center text-black"
+            className="self-start font-semibold text-2xl md:text-2xl mt-2 text-black"
           >
             {searchQuery
               ? `Search results for "${searchQuery}"`
-              : "All Properties"}
+              : "Available Properties"}
           </h2>
         </div>
+
 
 
         {/* Filters */}
